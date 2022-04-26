@@ -2,7 +2,7 @@
 
 namespace ParkyAPI.Models
 {
-    public class NationalParkDto
+    public class NationalPark
     {
         [Key]
         public int Id { get; set; }

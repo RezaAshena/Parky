@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using ParkyAPI.Data;
 using ParkyAPI.Repository;
 using ParkyAPI.Repository.IRepository;
+using AutoMapper;
+using ParkyAPI.ParkyMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 builder.Services.AddScoped<INationalParkRepository, NationalParkRepository>();
+builder.Services.AddAutoMapper(typeof(ParkyMappings));
 
 var app = builder.Build();
 
