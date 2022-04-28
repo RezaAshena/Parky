@@ -43,13 +43,14 @@ namespace ParkyAPI.Controllers
                 return NotFound();
             }
             var objDto = _mapper.Map<NationalParkDto>(obj);
-            //instead writing below code just add one line up
-            //var objDto = new NationalParkDto()    
+            ////instead writing below code just add one line up
+            //var objDto = new NationalParkDto()
             //{
             //    Created = obj.Created,
             //    Id = obj.Id,
             //    Name = obj.Name,
-            //    State = obj.State
+            //    State = obj.State,
+            //    Picture=obj.Picture
             //};
             return Ok(objDto);
         }
