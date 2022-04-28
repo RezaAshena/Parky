@@ -53,22 +53,19 @@ namespace ParkyAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             if (_trailRepo.TrailExists(trailDto.Name))
             {
                 ModelState.AddModelError("", "Trail Exists!");
                 return StatusCode(404, ModelState);
             }
-
-            var nrailobj = _mapper.Map<Trail>(trailDto);
-
-            if (!_trailRepo.CreateTrail(nrailobj))
+            var trailObj = _mapper.Map<Trail>(trailDto);
+            if (!_trailRepo.CreateTrail(trailObj))
             {
-                ModelState.AddModelError("", $"Something went wrong when saving the record{nrailobj.Name}");
+                ModelState.AddModelError("", $"Something went wrong when saving the record {trailObj.Name}");
                 return StatusCode(500, ModelState);
             }
+            return CreatedAtRoute("GetTrail", new { trailId = trailObj.Id }, trailObj); //to return created obj instead OK(201 instead 200)
 
-            return CreatedAtRoute("GetTrail", new { natioParkId = nrailobj.Id }, nrailobj); //to return created obj instead OK(201 instead 200)
         }
 
         [HttpPatch("{trailId:int}", Name = "UpdateTrail")]
