@@ -50,7 +50,7 @@ namespace ParkyAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("NationalParks");
+                    b.ToTable("NationalParks", (string)null);
                 });
 
             modelBuilder.Entity("ParkyAPI.Models.Trail", b =>
@@ -84,7 +84,7 @@ namespace ParkyAPI.Migrations
 
                     b.HasIndex("NationalParkId");
 
-                    b.ToTable("Trails");
+                    b.ToTable("Trails", (string)null);
                 });
 
             modelBuilder.Entity("ParkyAPI.Models.Trail", b =>
