@@ -32,7 +32,6 @@ namespace ParkyAPI.Repository
 
             //if user was found generate JWT Token
             var tokenHandler = new JwtSecurityTokenHandler();
-            var test = _appSettings.Secret;
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
