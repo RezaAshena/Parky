@@ -19,9 +19,9 @@ namespace ParkyAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody] User model)
+        public IActionResult Authenticate([FromBody] AuthenticationModel model)
         {
-            var user = _userRepo.Authenticate(model.Username, model.Password);
+            var user = _userRepo.Authenticate(model.UserName, model.Password);
             if (user == null)
             {
                 return BadRequest(new { message = "Username or password is incorrect" });
@@ -31,14 +31,14 @@ namespace ParkyAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public IActionResult Register([FromBody] User model)
+        public IActionResult Register([FromBody] AuthenticationModel model)
         {
-            bool ifUserNameUnique = _userRepo.IsUniqueUser(model.Username);
+            bool ifUserNameUnique = _userRepo.IsUniqueUser(model.UserName);
             if (!ifUserNameUnique)
             {
                 return BadRequest(new { message = "Username already exists" });
             }
-            var user = _userRepo.Register(model.Username, model.Password);
+            var user = _userRepo.Register(model.UserName, model.Password);
 
             if (user == null)
             {
