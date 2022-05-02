@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ParkyAPI.Models;
@@ -35,6 +36,7 @@ namespace ParkyAPI.Controllers
         }
 
         [HttpGet("{nationalParkId:int}", Name = "GetNationalPark")]
+        [Authorize]
         public IActionResult GetNationalPark(int nationalParkId)
         {
             var obj = _npRepo.GetNationalPark(nationalParkId);
