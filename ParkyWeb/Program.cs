@@ -54,8 +54,9 @@ app.UseCors(x => x
 .AllowAnyMethod()
 .AllowAnyHeader());
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",
