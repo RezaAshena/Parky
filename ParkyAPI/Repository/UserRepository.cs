@@ -13,11 +13,13 @@ namespace ParkyAPI.Repository
     {
         private readonly ApplicationDbContext _db;
         private readonly AppSettings _appSettings;
+         private readonly IConfiguration _config;
 
-        public UserRepository(ApplicationDbContext db, IOptions<AppSettings> appsettings)
+        public UserRepository(ApplicationDbContext db, IOptions<AppSettings> appsettings, IConfiguration config)
         {
             _db = db;
             _appSettings = appsettings.Value;
+            _config = config;
         }
 
         public User Authenticate(string username, string password)
@@ -32,7 +34,8 @@ namespace ParkyAPI.Repository
 
             //if user was found generate JWT Token
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var key2 = _config.GetValue<string>("AppSettings:Secret");
+            var key = Encoding.ASCII.GetBytes(key2);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[] {
